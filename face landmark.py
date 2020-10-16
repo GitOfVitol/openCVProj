@@ -26,14 +26,14 @@ rects = detector(gray, 1)
 
 
 for (i, rect) in enumerate(rects):
+    #학습된 predictor파일에 이미지와 얼굴 detect한 것을 넣고 68개의 point의 x, y좌표를 배열에 넣어줌
     points = np.matrix([[p.x, p.y] for p in predictor(gray, rect).parts()])
     show_parts = points[ALL]
     for (i, point) in enumerate(show_parts):
         x = point[0,0]
         y = point[0,1]
         cv2.circle(image, (x, y), 1, (0, 255, 255), -1)
-        cv2.putText(image, "{}".format(i + 1), (x, y - 2),
-		cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 255, 0), 1)
+        cv2.putText(image, "{}".format(i + 1), (x, y - 2), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 255, 0), 1)
 
 cv2.imshow("Face Landmark", image)
 cv2.waitKey(0)
